@@ -1,15 +1,30 @@
-
+import React, { useState }  from 'react';
 import './App.css';
 import Greeting from './Greeting.js';
 
 function App() {
-  console.log(Greeting)
+  const [show, setShow] = useState(true);
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>React x Web Components</h1>
-        <greeting-component></greeting-component>
+        <button onClick={() => setShow(!show)}>toggle alert</button>
+        <greeting-component
+          hidden={show}
+          status={'success'}
+          closable
+          oncloseChange={
+            () => {
+              console.log('react close change')
+              setShow(!show)
+            }
+          }
+        ></greeting-component>
       </header>
+
+
+
     </div>
   );
 }
