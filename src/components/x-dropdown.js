@@ -8,6 +8,7 @@ template.innerHTML = `
     }
   </style>
   <button></button>
+  <span class="flavor"></span>
   <div>
     <slot></slot>
   </div>
@@ -15,16 +16,23 @@ template.innerHTML = `
 
 export class XDropdown extends HTMLElement {
   static get observedAttributes() {
-    return ['title'];
+    return ['title', 'flavor'];
   }
 
   get title() {
     return this._title;
   }
-
   set title(value) {
     this._title = value;
     this.buttonElement.innerText = this._title;
+  }
+
+  get flavor() {
+    return this._flavor;
+  }
+  set flavor(value) {
+    this._flavor = value;
+    this.flavorElement.innerText = this._flavor;
   }
 
   constructor() {
@@ -39,6 +47,10 @@ export class XDropdown extends HTMLElement {
     this.buttonElement.innerText = this.title;
     this.buttonElement.addEventListener('click', () => this.toggle());
 
+    this._flavor = 'orange';
+    this.flavorElement = this.root.querySelector('.flavor');
+    this.flavorElement.innerText = this.flavor;
+
     this.contentElement = this.root.querySelector('div');
     this.contentElement.style.display = 'none';
   }
@@ -46,6 +58,8 @@ export class XDropdown extends HTMLElement {
   attributeChangedCallback(attrName, oldValue, newValue) {
     if (attrName === 'title' && this.buttonElement) {
       this.title = newValue;
+    } else if (attrName === 'flavor' && this.flavorElement) {
+      this.flavor = newValue;
     }
   }
 

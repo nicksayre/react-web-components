@@ -31,7 +31,10 @@ export class Dropdown extends Component {
   render() {
     //return <greeting-component ref={this.dropdownRef}>{this.props.children}</greeting-component>;
     return (
-      <x-dropdown ref={this.dropdownRef}>
+      <x-dropdown
+        ref={this.dropdownRef}
+        flavor={this.props.flavor}
+      >
         {this.props.children}
       </x-dropdown>
     )
